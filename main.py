@@ -7,9 +7,7 @@ import sys
 
 
 def format_link(link: str):
-    formatted_link = link.replace('.', '-')
-    formatted_link = formatted_link.replace('/', '_')
-    return formatted_link
+    return link.replace('.', '-').replace('/', '_')
 
 
 def write_dict(cards_list: list, file_name: str):
@@ -58,7 +56,7 @@ def get_forbidden_cards(link: str, update: bool):
                     continue
 
                 entries.append(
-                    {'type': card_information[0], 'name': card_information[1], 'advanced': card_information[2],
+                    {'type': card_information[0], 'name': card_information[1].lower(), 'advanced': card_information[2],
                      'traditional': card_information[3], 'comment': card_information[4],
                      'link': card_information[5]})
 
@@ -71,8 +69,8 @@ def get_forbidden_cards(link: str, update: bool):
 
     if cards_not_fetched or error_fetching:
         if not file_exists:
-            print(
-                'Something went wrong with downloading the cards and not old list does exists.\nMaybe just try again.\n')
+            print('Something went wrong with downloading the cards and not old list does exists.',
+                  'Maybe just try again.\n')
         else:
             with open(format_link(link) + '.csv', 'r') as csv_file:
                 reader = csv.DictReader(csv_file, delimiter=',')
@@ -105,7 +103,7 @@ def read_deck(file_name: str):
         last_symbol = line[-1:]
         if last_symbol == '\n':
             line = line[:-1]
-        cards.append(line)
+        cards.append(line.lower())
 
     return cards
 
