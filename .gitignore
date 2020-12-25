@@ -1,0 +1,6 @@
+*.csv
+*.txt
+*.log
+/.idea
+!requirements.txt
+venv
