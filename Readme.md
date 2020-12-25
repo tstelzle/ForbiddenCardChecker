@@ -7,7 +7,7 @@ This tool will check for german and english cards.
 
 ## Starting the script
 You will need to install the python dependencies.
-Do this with running the following command.
+Therefore you will have to run the following command.
 
 ```bash
 pip install -r requirements.txt
@@ -19,8 +19,8 @@ Watch out for typing errors, as the script will otherwise not be able to check t
 This file name needs to be your first parameter to the script.
 If the file is not in the same directory as the script please obviously put in the whole path.
 
-The second paramater is conditionally. As the script will always save the forbidden cards into a '.csv' file it will not download the cards if this file exits.
-Witht setting '-u' as second parameter you will force it to update the forbidden cards.
+The second paramater is conditional. As the script will always save the forbidden cards into a '.csv' file it will not download the cards if this file exits.
+Witht setting '-u' as a second parameter you will force it to update the forbidden cards.
 
 ## Examples
 ```bash
