@@ -24,8 +24,8 @@ Witht setting '-u' as second parameter you will force it to update the forbidden
 
 ## Examples
 ```bash
-python3 script.py aqua_deck.txt 
+python3 main.py aqua_deck.txt 
 ```
 ```bash
-python3 script.py main_deck.txt -u
+python3 main.py main_deck.txt -u
 ```
