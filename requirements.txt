@@ -8,3 +8,5 @@ requests==2.25.1
 selenium==3.141.0
 urllib3==1.26.2
 webdriver-manager==3.2.2
+fuzzywuzzy~=0.18.0
+python-Levenshtein==0.12.0
