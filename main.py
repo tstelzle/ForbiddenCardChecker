@@ -1,9 +1,12 @@
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from webdriver_manager.firefox import GeckoDriverManager
+import copy
 import csv
 import os.path
 import sys
+
+from fuzzywuzzy import fuzz
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 def format_link(link: str):
@@ -110,14 +113,20 @@ def read_deck(file_name: str):
 
 def check_forbidden_cards(given_forbidden_cards: list, deck_cards: list):
     forbidden_cards = []
+    close_cards = []
     if given_forbidden_cards is None:
         return None
     for card in given_forbidden_cards:
         for deck_card in deck_cards:
-            if card['name'] == deck_card:
+            percentage = fuzz.ratio(card['name'], deck_card)
+            if percentage == 100:
                 forbidden_cards.append(card)
+            elif percentage >= 75:
+                new_card = copy.deepcopy(card)
+                new_card['closest card'] = deck_card
+                close_cards.append(new_card)
 
-    return forbidden_cards
+    return [forbidden_cards, close_cards]
 
 
 def main():
@@ -141,9 +150,13 @@ def main():
     forbidden_deck_english = check_forbidden_cards(forbidden_cards_english, deck_cards)
 
     print('Verbotene Karten in deinem Deck:')
-    print_list(forbidden_deck_german)
+    print_list(forbidden_deck_german[0])
+    print('\nVerbotene Karten in deinem Deck (Typo):')
+    print_list(forbidden_deck_german[1])
     print('\nForbidden Cards in your deck:')
-    print_list(forbidden_deck_english)
+    print_list(forbidden_deck_english[0])
+    print('\nForbidden Cards in your deck (Typo):')
+    print_list(forbidden_deck_english[1])
 
 
 if __name__ == '__main__':
