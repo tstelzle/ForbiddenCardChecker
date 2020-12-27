@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result Forbidden Card Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+</head>
+<body>
+<div class="site">
+    <h1>Result Forbidden Card Checker</h1>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Advanced</th>
+            <th>Traditional</th>
+            <th>Comment</th>
+            <th>Link</th>
+        </tr>
+    {% for card in matching_results %}
+        <tr>
+            <td>{{ card['type'] }}</td>
+            <td>{{ card['name'] }}</td>
+            <td>{{ card['advanced'] }}</td>
+            <td>{{ card['traditional'] }}</td>
+            <td>{{ card['comment'] }}</td>
+            <td><a href="{{ card['link'] }}">Link</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Advanced</th>
+            <th>Traditional</th>
+            <th>Comment</th>
+            <th>Link</th>
+            <th>Closest Card</th>
+        </tr>
+    {% for card in typo_results %}
+        <tr>
+            <td>{{ card['type'] }}</td>
+            <td>{{ card['name'] }}</td>
+            <td>{{ card['advanced'] }}</td>
+            <td>{{ card['traditional'] }}</td>
+            <td>{{ card['comment'] }}</td>
+            <td><a href="{{ card['link'] }}">Link</a></td>
+            <td>{{ card['closest card'] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <button onclick="window.location.href='http://localhost:9102';">Main Page</button>
+</div>
+</body>
+</html>

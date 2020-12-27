@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api, Resource
+import json
 
 from modules.module_check import check_forbidden_cards
 from modules.module_read_data import get_forbidden_cards
@@ -22,11 +23,13 @@ class ForbiddenCard(Resource):
         forbidden_deck_german = check_forbidden_cards(forbidden_cards_german, deck_cards)
         forbidden_deck_english = check_forbidden_cards(forbidden_cards_english, deck_cards)
 
-        return [forbidden_deck_german[0] + forbidden_deck_english[0],
-                forbidden_deck_german[1] + forbidden_deck_english[1]], 200
+        forbidden_cards = forbidden_deck_german[0] + forbidden_deck_english[0]
+        typo_forbidden_cards = forbidden_deck_german[1] + forbidden_deck_english[1]
+
+        return json.dumps([forbidden_cards, typo_forbidden_cards]), 200
 
 
 api.add_resource(ForbiddenCard, "/forbiddenCard/<string:names>")
 
 if __name__ == "__main__":
-    app.run(debug=True, host='localhost', port=9999)
+    app.run(port=9101)

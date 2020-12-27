@@ -78,8 +78,6 @@ def get_forbidden_cards(link: str, update: bool):
                 for line in reader:
                     entries.append(line)
 
-    if len(entries) == 0:
-        return None
     return entries
 
 

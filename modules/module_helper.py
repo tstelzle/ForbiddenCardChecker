@@ -8,8 +8,6 @@ def print_dict(given_dict: dict):
 
 
 def print_list(given_list: list):
-    if given_list is None:
-        return
     if len(given_list) == 0:
         print('No files in list.')
     for elem in given_list:

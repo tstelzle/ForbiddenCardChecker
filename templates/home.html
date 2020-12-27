@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forbidden Card Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+</head>
+<body>
+<div class="site">
+    <h1>Forbidden Card Checker</h1>
+    <p>Deck-Input (each card is one line):</p>
+    <textarea class="input-field" form="card_form" name="cards"></textarea>
+    <form id="card_form" action="/forward/" method="post">
+        <button name="forwardBtn" type="submit">Check</button>
+    </form>
+</div>
+</body>
+</html>

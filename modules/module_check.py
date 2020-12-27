@@ -6,8 +6,8 @@ from fuzzywuzzy import fuzz
 def check_forbidden_cards(given_forbidden_cards: list, deck_cards: list):
     forbidden_cards = []
     close_cards = []
-    if given_forbidden_cards is None:
-        return None
+    if len(given_forbidden_cards) == 0:
+        return []
     for card in given_forbidden_cards:
         for deck_card in deck_cards:
             percentage = fuzz.ratio(card['name'], deck_card)

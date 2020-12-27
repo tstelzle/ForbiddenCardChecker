@@ -1,0 +1,51 @@
+.site {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-image: url("black_cards.jpg");
+    background-position: -100px 0px;
+    color: white;
+    font-size: 20px;
+}
+
+table {
+    border: 1px solid black;
+    width: 70%;
+    margin: 20px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td,
+th {
+    border: 3px solid black;
+}
+
+tr {
+    width: 14%;
+}
+
+button {
+    background: transparent;
+    border: 2px solid black;
+    color: white;
+    font-size: 20px;
+}
+
+.input-field {
+    margin: 10px;
+    width: 50%;
+    height: 70%;
+    background: transparent;
+    border: 5px solid black;
+    color: white;
+    font-size: 20px;
+}
