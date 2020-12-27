@@ -53,8 +53,12 @@ After this everything is setup and you can run the programm, like in the example
 
 ## Examples
 ```bash
-python3 main.py aqua_deck.txt 
+python3 cmd_main.py aqua_deck.txt
 ```
 ```bash
-python3 main.py main_deck.txt -u
+python3 cmd_main.py main_deck.txt -u
 ```
+
+## Running The Server
+
+TODO

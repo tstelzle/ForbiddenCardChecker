@@ -1,39 +1,35 @@
-import sys
+from flask import Flask
+from flask_restful import Api, Resource
+import json
 
 from modules.module_check import check_forbidden_cards
-from modules.module_helper import print_list
-from modules.module_read_data import read_deck, get_forbidden_cards
+from modules.module_read_data import get_forbidden_cards
+
+app = Flask(__name__)
+api = Api(app)
 
 
-def main():
-    link_german = "https://img.yugioh-card.com/de/gameplay/detail.php?id=1166"
-    link_english = "https://img.yugioh-card.com/oc/gameplay/detail.php?id=1155"
-    update = False
-    if len(sys.argv) < 2:
-        print('Not enough input.')
-        return
-    else:
-        if len(sys.argv) == 3:
-            if sys.argv[2] == '-u':
-                update = True
-        deck_file = sys.argv[1]
+class ForbiddenCard(Resource):
 
-    forbidden_cards_german = get_forbidden_cards(link_german, update)
-    forbidden_cards_english = get_forbidden_cards(link_english, update)
-    deck_cards = read_deck(deck_file)
+    def get(self, names: str):
+        link_german = "https://img.yugioh-card.com/de/gameplay/detail.php?id=1166"
+        link_english = "https://img.yugioh-card.com/oc/gameplay/detail.php?id=1155"
 
-    forbidden_deck_german = check_forbidden_cards(forbidden_cards_german, deck_cards)
-    forbidden_deck_english = check_forbidden_cards(forbidden_cards_english, deck_cards)
+        forbidden_cards_german = get_forbidden_cards(link_german, False)
+        forbidden_cards_english = get_forbidden_cards(link_english, False)
 
-    print('Verbotene Karten in deinem Deck:')
-    print_list(forbidden_deck_german[0])
-    print('\nVerbotene Karten in deinem Deck (Typo):')
-    print_list(forbidden_deck_german[1])
-    print('\nForbidden Cards in your deck:')
-    print_list(forbidden_deck_english[0])
-    print('\nForbidden Cards in your deck (Typo):')
-    print_list(forbidden_deck_english[1])
+        deck_cards = [card.lower() for card in names.split(';')]
+
+        forbidden_deck_german = check_forbidden_cards(forbidden_cards_german, deck_cards)
+        forbidden_deck_english = check_forbidden_cards(forbidden_cards_english, deck_cards)
+
+        forbidden_cards = forbidden_deck_german[0] + forbidden_deck_english[0]
+        typo_forbidden_cards = forbidden_deck_german[1] + forbidden_deck_english[1]
+
+        return json.dumps([forbidden_cards, typo_forbidden_cards]), 200
 
 
-if __name__ == '__main__':
-    main()
+api.add_resource(ForbiddenCard, "/forbiddenCard/<string:names>")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=80)

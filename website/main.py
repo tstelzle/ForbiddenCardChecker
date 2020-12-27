@@ -16,11 +16,11 @@ def check_cards():
     if cards == "":
         return redirect(f"/")
     else:
-        url = 'http://localhost:9101/forbiddenCard/' + cards
+        url = 'http://forbiddenCardChecker-api/forbiddenCard/' + cards
         output = json.loads(requests.get(url).json())
 
         return render_template('result.html', matching_results=output[0], typo_results=output[1])
 
 
 if __name__ == "__main__":
-    app.run(port=9102)
+    app.run(host="0.0.0.0", port=80)
