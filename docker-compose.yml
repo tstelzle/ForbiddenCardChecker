@@ -1,8 +1,19 @@
 version: "3.7"
 
+networks:
+        proxynet:
+                external: true
+        yugioh-network:
+                internal: true
+        yugioh-default:
+                external: true
+
 services:
   selenium:
     image: selenium/standalone-firefox
+    networks:
+            - yugioh-network
+            - yugioh-default
     container_name: forbiddenCardChecker-selenium
     ports:
       - 4444:4444
@@ -12,6 +23,9 @@ services:
       context: api
       dockerfile: Dockerfile
     container_name: forbiddenCardChecker-api
+    networks:
+            - yugioh-network
+            - yugioh-default
     ports:
       - 9101:80
     depends_on:
@@ -21,7 +35,10 @@ services:
     build:
       context: website
       dockerfile: Dockerfile
-    container_name: forbiddenCardChecker-website
+    container_name: yugioh
+    networks:
+            - proxynet
+            - yugioh-network
     ports:
       - 9102:80
     depends_on:
