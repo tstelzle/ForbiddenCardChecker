@@ -1,8 +1,8 @@
 import sys
 
-from modules.module_check import check_forbidden_cards
-from modules.module_helper import print_list
-from modules.module_read_data import read_deck, get_forbidden_cards
+from api.modules.module_check import check_forbidden_cards
+from api.modules.module_helper import print_list
+from api.modules.module_read_data import read_deck, get_forbidden_cards
 
 
 def main():
@@ -18,8 +18,8 @@ def main():
                 update = True
         deck_file = sys.argv[1]
 
-    forbidden_cards_german = get_forbidden_cards(link_german, update)
-    forbidden_cards_english = get_forbidden_cards(link_english, update)
+    forbidden_cards_german = get_forbidden_cards(link_german, update, False)
+    forbidden_cards_english = get_forbidden_cards(link_english, update, False)
     deck_cards = read_deck(deck_file)
 
     forbidden_deck_german = check_forbidden_cards(forbidden_cards_german, deck_cards)

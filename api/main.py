@@ -15,8 +15,8 @@ class ForbiddenCard(Resource):
         link_german = "https://img.yugioh-card.com/de/gameplay/detail.php?id=1166"
         link_english = "https://img.yugioh-card.com/oc/gameplay/detail.php?id=1155"
 
-        forbidden_cards_german = get_forbidden_cards(link_german, False)
-        forbidden_cards_english = get_forbidden_cards(link_english, False)
+        forbidden_cards_german = get_forbidden_cards(link_german, False, True)
+        forbidden_cards_english = get_forbidden_cards(link_english, False, True)
 
         deck_cards = [card.lower() for card in names.split(';')]
 

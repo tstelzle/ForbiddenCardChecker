@@ -1,11 +1,21 @@
 version: "3.7"
 
 services:
+  selenium:
+    image: selenium/standalone-firefox
+    container_name: forbiddenCardChecker-selenium
+    ports:
+      - 4444:4444
+
   api:
     build:
-      context: .
+      context: api
       dockerfile: Dockerfile
     container_name: forbiddenCardChecker-api
+    ports:
+      - 9101:80
+    depends_on:
+      - selenium
 
   website:
     build:

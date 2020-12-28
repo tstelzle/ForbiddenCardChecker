@@ -2,6 +2,6 @@
 *.txt
 *.log
 /.idea
-!requirements.txt
+!api/requirements.txt
 venv
-*/__pycache__/
+*/**/__pycache__/

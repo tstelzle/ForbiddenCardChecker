@@ -4,8 +4,9 @@ import os.path
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-from modules.module_helper import format_link
+from .module_helper import format_link
 
 
 def read_deck(file_name: str):
@@ -20,7 +21,7 @@ def read_deck(file_name: str):
     return cards
 
 
-def get_forbidden_cards(link: str, update: bool):
+def get_forbidden_cards(link: str, update: bool, remote_driver: bool):
     cards_not_fetched = True
     error_fetching = False
     file_exists = os.path.isfile(format_link(link) + '.csv')
@@ -28,10 +29,15 @@ def get_forbidden_cards(link: str, update: bool):
     entries = []
 
     if not file_exists or update:
+        print("Downlaoding: " + link)
         try:
             options = Options()
             options.headless = True
-            driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
+
+            if remote_driver:
+                driver = webdriver.Remote("http://selenium:4444/wd/hub", DesiredCapabilities.FIREFOX)
+            else:
+                driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
 
             driver.get(link)
 
