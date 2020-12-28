@@ -61,4 +61,10 @@ python3 cmd_main.py main_deck.txt -u
 
 ## Running The Server
 
-TODO
+You can run the programm also as a website on your maching via docker.
+Therefore you can just use the given docker-compose.yml to start everything.
+```bash
+docker-compose up -d
+```
+Afterwards you should be able to reach the website with "<machine_ip>:9102".
+The first time it downloads the current forbidden cards, hence it takes a bit longer.
