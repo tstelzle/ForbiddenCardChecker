@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Game Shuffler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+</head>
+<body>
+<div class="site">
+    <h1>Sample Game Shuffler</h1>
+    <p>{{ output }}</p>
+    <p>First 5 Cards</p>
+    <ol>
+    {% for i in range(0,5) %}
+        <li>{{ output[i] }}</li>
+    {% endfor %}
+    </ol>
+    <p>Rest Of The Deck</p>
+    <ol start="6">
+    {% for i in range(5,output|length) %}
+        <li>{{ output[i] }}</li>
+    {% endfor %}
+    </ol>
+    <button onclick="window.location.href='/'">Main Page</button>
+</div>
+</body>
+</html>

@@ -7,10 +7,11 @@
 <body>
 <div class="site">
     <h1>Forbidden Card Checker</h1>
-    <p>Deck-Input (each card is one line):</p>
+    <p>Deck-Input (Format: card amount, card name):</p>
     <textarea class="input-field" form="card_form" name="cards"></textarea>
     <form id="card_form" action="/forward/" method="post">
-        <button name="forwardBtn" type="submit">Check</button>
+        <button name="checkBtn" type="submit">Check</button>
+        <button name="sampleBtn" type="submit">Sample</button>
     </form>
 </div>
 </body>

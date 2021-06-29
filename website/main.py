@@ -16,10 +16,17 @@ def check_cards():
     if cards == "":
         return redirect(f"/")
     else:
-        url = 'http://forbiddenCardChecker-api/forbiddenCard/' + cards
-        output = json.loads(requests.get(url).json())
+        try:
+            request.form['checkBtn']
+            url = 'http://forbiddenCardChecker-api/forbiddenCard/' + cards
+            output = json.loads(requests.get(url).json())
 
-        return render_template('result.html', matching_results=output[0], typo_results=output[1])
+            return render_template('result_check.html', matching_results=output[0], typo_results=output[1])
+        except KeyError:
+            url = 'http://forbiddenCardChecker-api/sampleGame/' + cards
+            output = json.loads(requests.get(url).json())
+
+            return render_template('result_sample.html', output=output)
 
 
 if __name__ == "__main__":
